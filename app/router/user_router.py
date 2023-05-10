@@ -4,8 +4,6 @@ from database.model import user_schema
 from database.crud import user_crud
 from database import db
 
-
-
 router = APIRouter(
     prefix='/user',
     tags=['user'],
