@@ -13,9 +13,8 @@ from yaml import safe_load
 from .constants import Definition as cons
 
 from database.model import battery_schema
-from database import mysql_db
 from database.crud import battery_crud
-
+from database import mysql_db
 
 def find_feat_index(sel_volt, volt_mem, mem_size):
     for idx in range(mem_size - 1, 0, -1):
@@ -30,6 +29,10 @@ def read_data_test():
     print(db_session)
 
     batter_data = battery_crud.get_datas(db=db_session)
+
+    for row in batter_data:
+        print(row.ts, row.bmsid, row.packcurr, row.packvol, row.chgstat)
+
     if batter_data is None:
         raise HTTPException(status_code=404, detail="User not found")
     return batter_data
