@@ -9,6 +9,7 @@ router = APIRouter(
     tags=['user'],
 )
 
+
 # DB 세션을 가져오는 함수
 def get_db():
     try:
@@ -16,6 +17,7 @@ def get_db():
         yield db_session
     finally:
         db_session.close()
+
 
 # API - create user
 @router.post("/users", response_model=user_schema.User)
@@ -25,6 +27,7 @@ def create_user(user: user_schema.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Name already registered")
     return user_crud.create_user(db=db, user=user)
 
+
 # API - update user
 @router.put("/users/{user_id}", response_model=user_schema.User)
 def update_user(user_id: int, user: user_schema.UserCreate, db: Session = Depends(get_db)):
@@ -33,9 +36,10 @@ def update_user(user_id: int, user: user_schema.UserCreate, db: Session = Depend
         raise HTTPException(status_code=404, detail="User not found")
     return user_crud.update_user(db=db, user_id=user_id, user=user)
 
+
 # API - select user by user id
 @router.get("/{user_id}", response_model=user_schema.User)
-def read_user_by_id(user_id: int, db: Session = Depends(get_db)):
+def read_user_by_id(user_id: str, db: Session = Depends(get_db)):
     """
     Get a specific user by ID.
     """
@@ -43,6 +47,7 @@ def read_user_by_id(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
 
 # API - delete user by user id
 @router.delete("/{user_id}")
