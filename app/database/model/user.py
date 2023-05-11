@@ -3,7 +3,10 @@
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
 from ..db import Base
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 class User(Base):
     __tablename__ = "test_user"

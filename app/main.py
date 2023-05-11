@@ -1,12 +1,17 @@
 from fastapi import FastAPI
+<<<<<<< HEAD
 from router import user_router
 from os import path
 
 import soh.soh_service as service
+=======
+from router import user_router, bmsInfo_router
+>>>>>>> refs/remotes/origin/master
 
 app = FastAPI()
 
 app.include_router(user_router.router)
+app.include_router(bmsInfo_router.router)
 
 
 @app.get("/")
